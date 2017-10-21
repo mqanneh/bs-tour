@@ -1,0 +1,16 @@
+bootstrap.tour:
+  remote: https://github.com/sorich87/bootstrap-tour
+  version: "v0.12.0"
+  license:
+    name: MIT
+    url: https://github.com/sorich87/bootstrap-tour/blob/v0.12.0/README.md
+    gpl-compatible: true
+  css:
+    theme:
+      assets/css/bootstrap-tour.min.css: {}
+  js:
+    assets/js/bootstrap-tour.min.js: { minified: true }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
