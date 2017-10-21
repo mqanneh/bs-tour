@@ -4,3 +4,11 @@
  * @file
  * D8: Bootstrap Tour module.
  */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function bs_tour_page_attachments(array &$page) {
+  // Attach libraries
+  $page['#attached']['library'][] = 'bs_tour/bootstrap.tour';
+}
