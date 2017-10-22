@@ -7,9 +7,10 @@ bootstrap.tour:
     gpl-compatible: true
   css:
     theme:
-      assets/css/bootstrap-tour.min.css: {}
+      assets/css/bootstrap-tour-standalone.min.css: {}
   js:
-    assets/js/bootstrap-tour.min.js: { minified: true }
+    assets/js/bootstrap-tour-standalone.min.js: { minified: true }
+    assets/js/bs-tour.js: {}
   dependencies:
     - core/jquery
     - core/drupal
