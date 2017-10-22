@@ -28,7 +28,7 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('bs.tour.settings');
+    $config = \Drupal::service('config.factory')->getEditable('bs.tour.settings');
 
     $form['bs_tour_form_intro'] = array(
       '#markup' => '<p>Quick and easy way to build your <b>Tours</b> with <b>Bootstrap</b> Popovers.</p>',
