@@ -10,7 +10,7 @@
  */
 function bs_tour_page_attachments(array &$page) {
   $config_factory = \Drupal::configFactory();
-  $config = $config_factory->get('bs.tour.settings');
+  $config = $config_factory->get('bs_tour.settings');
 
   $tour = array(
     'keyboard' => (bool)$config->get('keyboard'),

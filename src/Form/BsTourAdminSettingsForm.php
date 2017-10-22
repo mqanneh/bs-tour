@@ -21,14 +21,14 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
-    return ['bs.tour.settings'];
+    return ['bs_tour.settings'];
   }
 
   /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = \Drupal::service('config.factory')->getEditable('bs.tour.settings');
+    $config = \Drupal::service('config.factory')->getEditable('bs_tour.settings');
 
     $form['bs_tour_form_intro'] = array(
       '#markup' => '<p>Quick and easy way to build your <b>Tours</b> with <b>Bootstrap</b> Popovers.</p>',
@@ -170,7 +170,7 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $config = $this->config('bs.tour.settings');
+    $config = $this->config('bs_tour.settings');
     $config
       ->set('debug', $form_state->getValue('bs_tour_form_debug'))
       ->set('keyboard', $form_state->getValue('bs_tour_form_keyboard'))
