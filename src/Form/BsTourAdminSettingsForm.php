@@ -94,11 +94,40 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
           '#title' => t('Tip @num settings', array('@num' => $step)),
           '#group' => 'bs_tour_groups_settings'
         );
+        $form['bs_tour_steps_' . $step . '_wrapper']['bs_tour_step_' . $step . '_title'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Title'),
+          '#default_value' => $config->get('steps')[$step - 1]['title'],
+          '#description' => $this->t('Tip title.')
+        );
+        $form['bs_tour_steps_' . $step . '_wrapper']['bs_tour_step_' . $step . '_content'] = array(
+          '#type' => 'text_format',
+          '#title' => $this->t('Content'),
+          '#default_value' => $config->get('steps')[$step - 1]['content']['value'],
+          '#rows' => 5,
+          '#description' => $this->t('Tip content.')
+        );
         $form['bs_tour_steps_' . $step . '_wrapper']['bs_tour_step_' . $step . '_element'] = array(
           '#type' => 'textfield',
           '#title' => $this->t('jQuery selector'),
           '#default_value' => $config->get('steps')[$step - 1]['element'],
-          '#description' => $this->t('Enter jQuery selector for a DOM element to display tour tip.')
+          '#description' => $this->t('Enter jQuery selector for an HTML element on which the tip should be shown.')
+        );
+        $form['bs_tour_steps_' . $step . '_wrapper']['bs_tour_step_' . $step . '_placement'] = array(
+          '#type' => 'select',
+          '#title' => $this->t('Placement'),
+          '#options' => array(
+            'auto' => $this->t('Auto'),
+            'top' => $this->t('Top'),
+            'bottom' => $this->t('Bottom'),
+            'left' => $this->t('Left'),
+            'right' => $this->t('Right'),
+          ),
+          '#multiple' => FALSE,
+          '#default_value' => $config->get('steps')[$step - 1]['placement'],
+          '#description' => $this->t('How to position the tip.'
+            . 'Possible choices: <b>top</b>, <b>bottom</b>, <b>left</b>, <b>right</b> and <b>auto</b>.'
+            . '<br />When <b>auto</b> is specified, it will dynamically reorient the tip.'),
         );
         $form['bs_tour_steps_' . $step . '_wrapper']['bs_tour_step_' . $step . '_backdrop'] = array(
           '#type' => 'select',
@@ -117,6 +146,11 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
           '#min' => 0,
           '#step' => 1,
           '#default_value' => $config->get('steps')[$step - 1]['backdropPadding'],
+          '#states' => array(
+            'visible' => array(
+              'select[name="bs_tour_step_' . $step . '_backdrop"]' => array('value' => 1),
+            ),
+          ),
           '#description' => $this->t('Add padding to the dark background that highlights the tip element.'),
         );
       }
@@ -138,10 +172,10 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config('bs.tour.settings');
     $config
-    ->set('debug', $form_state->getValue('bs_tour_form_debug'))
-    ->set('keyboard', $form_state->getValue('bs_tour_form_keyboard'))
-    ->set('number_of_tips', $form_state->getValue('bs_tour_number_of_tips'))
-    ->save();
+      ->set('debug', $form_state->getValue('bs_tour_form_debug'))
+      ->set('keyboard', $form_state->getValue('bs_tour_form_keyboard'))
+      ->set('number_of_tips', $form_state->getValue('bs_tour_number_of_tips'))
+      ->save();
 
     $number_of_tips = $form_state->getValue('bs_tour_number_of_tips');
     if ($number_of_tips) {
@@ -149,7 +183,10 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
 
       for ($step = 1; $step <= $number_of_tips; $step++) {
         $tips[] = array(
+          'title' => $form_state->getValue('bs_tour_step_' . $step . '_title'),
+          'content' => $form_state->getValue('bs_tour_step_' . $step . '_content'),
           'element' => $form_state->getValue('bs_tour_step_' . $step . '_element'),
+          'placement' => $form_state->getValue('bs_tour_step_' . $step . '_placement'),
           'backdropPadding' => $form_state->getValue('bs_tour_step_' . $step . '_backdrop_padding'),
           'backdrop' => $form_state->getValue('bs_tour_step_' . $step . '_backdrop'),
         );
