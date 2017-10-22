@@ -103,7 +103,7 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
         $form['bs_tour_steps_' . $step . '_wrapper']['bs_tour_step_' . $step . '_content'] = array(
           '#type' => 'text_format',
           '#title' => $this->t('Content'),
-          '#default_value' => $config->get('steps')[$step - 1]['content']['value'],
+          '#default_value' => $config->get('steps')[$step - 1]['content'],
           '#rows' => 5,
           '#description' => $this->t('Tip content.')
         );
@@ -184,11 +184,11 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
       for ($step = 1; $step <= $number_of_tips; $step++) {
         $tips[] = array(
           'title' => $form_state->getValue('bs_tour_step_' . $step . '_title'),
-          'content' => $form_state->getValue('bs_tour_step_' . $step . '_content'),
+          'content' => $form_state->getValue('bs_tour_step_' . $step . '_content')['value'],
           'element' => $form_state->getValue('bs_tour_step_' . $step . '_element'),
           'placement' => $form_state->getValue('bs_tour_step_' . $step . '_placement'),
-          'backdropPadding' => $form_state->getValue('bs_tour_step_' . $step . '_backdrop_padding'),
           'backdrop' => $form_state->getValue('bs_tour_step_' . $step . '_backdrop'),
+          'backdropPadding' => $form_state->getValue('bs_tour_step_' . $step . '_backdrop_padding'),
         );
       }
 

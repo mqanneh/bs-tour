@@ -12,21 +12,16 @@ function bs_tour_page_attachments(array &$page) {
   $config_factory = \Drupal::configFactory();
   $config = $config_factory->get('bs.tour.settings');
 
-  $keyboard = $config->get('keyboard');
-  $debug = $config->get('debug');
-  $number_of_tips = $config->get('number_of_tips');
-  $steps = $config->get('steps');
-
   $tour = array(
-    'keyboard' => $config->get('keyboard'),
-    'debug' => $config->get('debug'),
+    'keyboard' => (bool)$config->get('keyboard'),
+    'debug' => (bool)$config->get('debug'),
     'number_of_tips' => $config->get('number_of_tips'),
     'steps' => $config->get('steps'),
   );
 
-  // Export settings
-  $page['#attached']['drupalSettings']['bs_tour']['tour'] = $tour;
-
   // Attach libraries
   $page['#attached']['library'][] = 'bs_tour/bootstrap.tour';
+
+  // Export settings
+  $page['#attached']['drupalSettings']['bs_tour']['tour'] = $tour;
 }
