@@ -4,4 +4,4 @@ bs_tour.admin:
     _form: '\Drupal\bs_tour\Form\BsTourAdminSettingsForm'
     _title: 'Bootstrap Tour'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'administer bs tour'
