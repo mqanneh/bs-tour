@@ -14,6 +14,11 @@
 
           for (var i = 0; i < tips.length; i++) {
             if ($(tips[i].element).length > 0) {
+              tips[i].backdropPadding.top = parseInt(tips[i].backdropPadding.top);
+              tips[i].backdropPadding.right = parseInt(tips[i].backdropPadding.right);
+              tips[i].backdropPadding.bottom = parseInt(tips[i].backdropPadding.bottom);
+              tips[i].backdropPadding.left = parseInt(tips[i].backdropPadding.left);
+
               switch (tips[i].backdrop) {
                 case "0":
                   tips[i].backdrop = false;

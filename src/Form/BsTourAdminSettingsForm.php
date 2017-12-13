@@ -140,18 +140,64 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
           '#default_value' => $config->get('steps')[$step - 1]['backdrop'],
           '#description' => $this->t('Show a dark background behind the popover and its element, highlighting the current tip.'),
         );
-        $form['bs_tour_steps_' . $step . '_wrapper']['bs_tour_step_' . $step . '_backdrop_padding'] = array(
-          '#type' => 'number',
+        $form['bs_tour_steps_' . $step . '_wrapper']['bs_tour_step_' . $step . '_backdrop_padding_wrapper'] = array(
+          '#type' => 'fieldset',
           '#title' => $this->t('Highlight padding'),
-          '#min' => 0,
-          '#step' => 1,
-          '#default_value' => $config->get('steps')[$step - 1]['backdropPadding'],
+          '#open' => TRUE,
           '#states' => array(
             'visible' => array(
               'select[name="bs_tour_step_' . $step . '_backdrop"]' => array('value' => 1),
             ),
           ),
           '#description' => $this->t('Add padding to the dark background that highlights the tip element.'),
+        );
+        $form['bs_tour_steps_' . $step . '_wrapper']['bs_tour_step_' . $step . '_backdrop_padding_wrapper']['bs_tour_step_' . $step . '_backdrop_padding_top'] = array(
+          '#type' => 'number',
+          '#title' => $this->t('Top padding'),
+          '#min' => 0,
+          '#step' => 1,
+          '#default_value' => !empty($config->get('steps')[$step - 1]['backdropPadding']['top']) ? $config->get('steps')[$step - 1]['backdropPadding']['top'] : 0,
+          '#states' => array(
+            'required' => array(
+              'select[name="bs_tour_step_' . $step . '_backdrop"]' => array('value' => 1),
+            ),
+          ),
+        );
+        $form['bs_tour_steps_' . $step . '_wrapper']['bs_tour_step_' . $step . '_backdrop_padding_wrapper']['bs_tour_step_' . $step . '_backdrop_padding_right'] = array(
+          '#type' => 'number',
+          '#title' => $this->t('Right padding'),
+          '#min' => 0,
+          '#step' => 1,
+          '#default_value' => !empty($config->get('steps')[$step - 1]['backdropPadding']['right']) ? $config->get('steps')[$step - 1]['backdropPadding']['right'] : 0,
+          '#states' => array(
+            'required' => array(
+              'select[name="bs_tour_step_' . $step . '_backdrop"]' => array('value' => 1),
+            ),
+          ),
+        );
+        $form['bs_tour_steps_' . $step . '_wrapper']['bs_tour_step_' . $step . '_backdrop_padding_wrapper']['bs_tour_step_' . $step . '_backdrop_padding_bottom'] = array(
+          '#type' => 'number',
+          '#title' => $this->t('Bottom padding'),
+          '#min' => 0,
+          '#step' => 1,
+          '#default_value' => !empty($config->get('steps')[$step - 1]['backdropPadding']['bottom']) ? $config->get('steps')[$step - 1]['backdropPadding']['bottom'] : 0,
+          '#states' => array(
+            'required' => array(
+              'select[name="bs_tour_step_' . $step . '_backdrop"]' => array('value' => 1),
+            ),
+          ),
+        );
+        $form['bs_tour_steps_' . $step . '_wrapper']['bs_tour_step_' . $step . '_backdrop_padding_wrapper']['bs_tour_step_' . $step . '_backdrop_padding_left'] = array(
+          '#type' => 'number',
+          '#title' => $this->t('Left padding'),
+          '#min' => 0,
+          '#step' => 1,
+          '#default_value' => !empty($config->get('steps')[$step - 1]['backdropPadding']['left']) ? $config->get('steps')[$step - 1]['backdropPadding']['left'] : 0,
+          '#states' => array(
+            'required' => array(
+              'select[name="bs_tour_step_' . $step . '_backdrop"]' => array('value' => 1),
+            ),
+          ),
         );
       }
     }
@@ -188,7 +234,12 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
           'element' => $form_state->getValue('bs_tour_step_' . $step . '_element'),
           'placement' => $form_state->getValue('bs_tour_step_' . $step . '_placement'),
           'backdrop' => $form_state->getValue('bs_tour_step_' . $step . '_backdrop'),
-          'backdropPadding' => $form_state->getValue('bs_tour_step_' . $step . '_backdrop_padding'),
+          'backdropPadding' => array(
+            'top' => $form_state->getValue('bs_tour_step_' . $step . '_backdrop_padding_top'),
+            'right' => $form_state->getValue('bs_tour_step_' . $step . '_backdrop_padding_right'),
+            'bottom' => $form_state->getValue('bs_tour_step_' . $step . '_backdrop_padding_bottom'),
+            'left' => $form_state->getValue('bs_tour_step_' . $step . '_backdrop_padding_left'),
+          )
         );
       }
 
