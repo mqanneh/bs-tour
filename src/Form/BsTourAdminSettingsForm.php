@@ -104,6 +104,7 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
           '#type' => 'text_format',
           '#title' => $this->t('Content'),
           '#default_value' => $config->get('steps')[$step - 1]['content'],
+          '#format' => $config->get('steps')[$step - 1]['content_format'],
           '#rows' => 5,
           '#description' => $this->t('Tip content.')
         );
@@ -231,6 +232,7 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
         $tips[] = array(
           'title' => $form_state->getValue('bs_tour_step_' . $step . '_title'),
           'content' => $form_state->getValue('bs_tour_step_' . $step . '_content')['value'],
+          'content_format' => $form_state->getValue('bs_tour_step_' . $step . '_content')['format'],
           'element' => $form_state->getValue('bs_tour_step_' . $step . '_element'),
           'placement' => $form_state->getValue('bs_tour_step_' . $step . '_placement'),
           'backdrop' => $form_state->getValue('bs_tour_step_' . $step . '_backdrop'),
