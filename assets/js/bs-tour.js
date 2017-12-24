@@ -58,6 +58,10 @@
 
             // Start the tour
             tour.start();
+
+            // Add tour object to drupalSettings to allow manipulating tour from other modules.
+            // Example: drupalSettings.bs_tour.currentTour.end();
+            drupalSettings.bs_tour.currentTour = tour;
           }
 
         } catch (e) {
