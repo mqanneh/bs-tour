@@ -10,7 +10,13 @@
           var tips = tourOptions.steps;
           var keyboard = tourOptions.keyboard;
           var debug = tourOptions.debug;
+          var autoplay = tourOptions.autoplay;
           var steps = [];
+
+          // Return if the tour isn't set to autostart.
+          if (!autoplay) {
+            return;
+          }
 
           for (var i = 0; i < tips.length; i++) {
             if ($(tips[i].element).length > 0) {

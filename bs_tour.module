@@ -15,6 +15,7 @@ function bs_tour_page_attachments(array &$page) {
   $tour = array(
     'keyboard' => (bool)$config->get('keyboard'),
     'debug' => (bool)$config->get('debug'),
+    'autoplay' => (bool)$config->get('autoplay'),
     'number_of_tips' => $config->get('number_of_tips'),
     'steps' => $config->get('steps'),
   );

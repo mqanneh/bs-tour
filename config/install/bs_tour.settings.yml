@@ -1,4 +1,5 @@
 keyboard: true
 debug: false
+autoplay: true
 number_of_tips: 0
 steps: []

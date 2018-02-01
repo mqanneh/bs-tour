@@ -64,6 +64,18 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
       '#description' => $this->t('Set this option to true to have some useful information printed in the console.'),
     );
 
+    $form['general']['bs_tour_form_autoplay'] = array(
+      '#type' => 'select',
+      '#title' => $this->t('Autoplay'),
+      '#options' => array(
+        TRUE => $this->t('True'),
+        FALSE => $this->t('False'),
+      ),
+      '#multiple' => FALSE,
+      '#default_value' => $config->get('autoplay'),
+      '#description' => $this->t('Set this option to true to make the tour autoplay after the page loaded.'),
+    );
+
     $form['steps'] = array(
       '#type' => 'fieldset',
       '#title' => $this->t('Tour Tips'),
@@ -219,8 +231,9 @@ class BsTourAdminSettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config('bs_tour.settings');
     $config
-      ->set('debug', $form_state->getValue('bs_tour_form_debug'))
       ->set('keyboard', $form_state->getValue('bs_tour_form_keyboard'))
+      ->set('debug', $form_state->getValue('bs_tour_form_debug'))
+      ->set('autoplay', $form_state->getValue('bs_tour_form_autoplay'))
       ->set('number_of_tips', $form_state->getValue('bs_tour_number_of_tips'))
       ->save();
 
