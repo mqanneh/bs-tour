@@ -76,4 +76,19 @@
     }
   };
 
+  Drupal.behaviors.bsTourAction = {
+    attach: function (context, settings) {
+      $(window).on('load', function (event) {
+        var startTour = $('.bs-tour-action-trigger');
+        startTour.click(function (event) {
+          event.preventDefault();
+          var tourObject = drupalSettings.bs_tour.currentTour;
+          if (tourObject && tourObject._options.steps.length) {
+            tourObject.start(true);
+          }
+        });
+      });
+    }
+  };
+
 })(window.jQuery, window._, window.Drupal, window.drupalSettings);

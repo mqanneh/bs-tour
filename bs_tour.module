@@ -26,3 +26,17 @@ function bs_tour_page_attachments(array &$page) {
   // Export settings
   $page['#attached']['drupalSettings']['bs_tour']['tour'] = $tour;
 }
+
+/**
+ * Implements hook_theme().
+ */
+function bs_tour_theme($existing, $type, $theme, $path) {
+  return array('bs_tour_block' =>
+    array(
+      'variables' => array(
+        'block_settings' => NULL,
+      ),
+      'template' => 'block--bs-tour--block'
+    )
+  );
+}
