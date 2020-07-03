@@ -2,4 +2,6 @@ name: "D8: Bootstrap Tour"
 type: module
 description: "D8: Bootstrap Tour."
 configure: bs_tour.admin
+
 core: 8.x
+core_version_requirement: ^8 || ^9
